@@ -1,0 +1,219 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.top{
+ display: flex; 
+ align-items: center;
+ height: 7vh;
+ justify-content: space-around;  
+
+ width: 100%;
+ 
+}
+.logo img{
+    width: 40%;
+    
+    
+}
+.nav{
+    width: 80%;
+    display: flex;
+}
+.nav a{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    background-color: rgb(252, 252, 252);
+    border-radius: 10px;
+    margin: 10px;
+    color: rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px rgb(53, 51, 51);
+    
+}
+.nav :hover{
+    background-color: rgb(83, 83, 228);
+    color: aliceblue;
+}
+
+.header{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(202, 31, 103);
+    color: aliceblue;
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    
+}
+.form{
+    display: flex;
+    border-style: none;
+    margin-top: 10px;
+}
+.check{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    border-style: none;
+}
+.check2{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    border-style: none;
+}
+
+main{
+    min-height: 62vh;
+    width: 100%;
+   
+    
+}
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+   flex-wrap: wrap;
+   gap: 1rem;
+    min-height: 60vh;
+    align-items: center; 
+    margin-top:1px;
+}
+
+    
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: .5rem;
+    width: 150px;
+    height: 250px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgb(53, 51, 51);
+    text-align: center;
+    background-color: rgb(83, 83, 228);
+    color: aliceblue;
+    flex-wrap: wrap;
+}
+
+.card img{
+    width: 80%;
+    height: 80px;
+    border-radius: 10px;
+    
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    height: 14.5vh ;
+    background-color: beige;
+
+}
+.logosredes{
+    display: flex;
+    width: 50%;
+    justify-content: end;
+
+}
+.cohort{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+    font-size: 2rem;
+}
+
+
+.logosredes img{
+    width: 40px;
+    height: 35px;
+}
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 63vh;
+    justify-content:center;
+}
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.tablac{
+    height: 63vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.details{
+    display: flex;
+    height: 63vh;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.details img{
+    border-radius: 10px;
+}
+
+.ancorbut{
+    text-decoration: none;
+    background-color: aliceblue;
+    color: black;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+
+@media screen and (max-width: 768px){
+    
+       
+    .cards{
+        
+        gap: 3rem;
+        margin-top: 10px;
+    }
+    .card{
+        width: 150px;
+        
+    }
+    .card img{
+        object-fit: cover;
+    }
+    .details{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 517px){
+   .top{
+    flex-direction: column;
+    height: 20vh;
+    text-align: center;
+    
+   }
+   .logo img{
+    width: 50%;
+   }
+    .form{
+    flex-direction: column;
+   }
+   .check{
+    width: 100%;
+   }
+   .check2{
+    width: 100%;
+   }
+   
+   
+}
