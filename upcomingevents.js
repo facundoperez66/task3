@@ -30,7 +30,7 @@ function printEvents(array,id) {
     <p>${event.date}</p>
     <p>${event.category}</p>
     <div class="ancorbut">
-    <a href="./details.html">more info</a>
+    <a href="./details.html?id=${event._id}">more info</a>
     </div>
     </article>
             `
