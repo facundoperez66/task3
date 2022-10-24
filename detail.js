@@ -1,20 +1,16 @@
 let id = location.search.slice(4);
-console.log(id);
+//console.log(id);
 
 let detailCard = document.getElementById('detail-card');
 
 let idFiltrada = data.events.filter(data => data._id == id)
-console.log(idFiltrada);
-printEvents(idFiltrada, 'detail-card')
+//console.log(idFiltrada);
+idFiltrada.forEach(printEvents)
 
-function printEvents(array,id) {
-    
-    document.querySelector(`#${id}`).innerHTML = ""
-    array.forEach(event =>{
-        document.querySelector(`#${id}`).innerHTML +=
-            `
-            
-         <figure class="detailimage">
+function printEvents(event) {
+    detailCard.innerHTML +=
+    `
+    <figure class="detailimage">
             <img src="${event.image}" alt="comidas">
         </figure>
         <article> 
@@ -30,6 +26,9 @@ function printEvents(array,id) {
         <div><p>capacity:${event.capacity}</p></div>
         <div><p>assistance:${event.assistance}</p></div>
         <div><p>price:${event.price}</p></div>
-            `
-    })
+
+    `
 }
+
+
+
