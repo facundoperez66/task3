@@ -1,29 +1,15 @@
 console.log(data)
-const container = document.getElementById(`container`)
+const containerCards = document.getElementById(`container`)
+const eventos = data.events
+let actualDate = '2022-01-01'
 
 //console.log(data.events[0])
+let pastEvents = eventos.filter(event => event.date < actualDate )
 
 
-function filtrarFechas(array,fecha){
-    let filtrados = []
-    for(let i = 0; i < array.length; i++){
-        if( array[i].date < fecha ){
-            filtrados.push(array[i])
-        }
-    }
-    return filtrados
-}
-
-const fechas = filtrarFechas( data.events, `2022-01-01`)
-
-
-
-function printEvents(array,id) {
-    
-    document.querySelector(`#${id}`).innerHTML = ""
-    array.forEach(event =>{
-        document.querySelector(`#${id}`).innerHTML +=
-            `
+function printEvents(event) {
+    containerCards.innerHTML +=
+    `
     <article class="card">
     <img src="${event.image}" alt="food">
     <h4>${event.name}</h4>
@@ -33,86 +19,67 @@ function printEvents(array,id) {
     <a href="./details.html?id=${event._id}">more info</a>
     </div>
     </article>
-            `
-    })
+    `
 }
-printEvents(fechas,'container')
+
+pastEvents.forEach(printEvents)
 
 
+const containerChecks = document.getElementById('checkBox-js')
 
-//const checkBoxs = document.getElementById( 'checkBox-js' )
+let categoriasCheckbox = new Set (eventos.map(evento => evento.category))
 
-let categorias = new Set(data.events.map(element=> element.category))
+categoriasCheckbox.forEach(createCheckBox)
 
-//console.log(categorias);
-
-categorias = [...categorias]
-
-//console.log(categorias);
-
-let printCategories = (array,id) => {
-    document.querySelector(`#${id}`).innerHTML = ""
-    array.forEach(cat =>{
-        document.querySelector(`#${id}`).innerHTML +=
-            `
-            <label for="${cat.toLowerCase()}">${cat.toUpperCase()} 
-            <input type="checkbox" name="category" class="checkbox" id="${cat.toLowerCase()}"  value="${cat.toLowerCase()}">
+function createCheckBox(categoria){
+    containerChecks.innerHTML +=  
+    `
+    <label for=""> 
+            <input type="checkbox" name="category" class="checkboxClass" id=""  value="${categoria}">${categoria}
             
             </label>
-            `
-    })
-   
-    
-}
-printCategories(categorias,'checkBox-js')
-
-let arrayEventos = categorias.map(cadaCategoria=> {
-  let arrayFiltrado = data.events.filter(cadaEvento => cadaEvento.category === cadaCategoria)
-    return arrayFiltrado
-})
-//console.log(arrayEventos);
-//console.log(categories);
-
-let checks = document.querySelectorAll(`.checkbox`) // elquery selector tambien puede tomar la clase "checkbox"
-console.log(checks);
-
-for(let element of checks){
-    element.addEventListener(
-        'click',
-        (event)=> search(event,fechas)
-    )
+    `
 }
 
-function search(ev,array){
-    //console.log(ev.target.checked);
-    //console.log(ev.target.value);
-    
-    
-    let checks = document.querySelectorAll(`.checkbox:checked`)
-    console.log(checks);
-    
-    let filterArray = []
-    checks.forEach(cadaCategoria =>{
-        let newArray = array.filter(cadaEvento => cadaEvento.category.toLowerCase()=== cadaCategoria.value)
-        filterArray = filterArray.concat(newArray)
-        
-    })
-    
-    if(filterArray.length === 0){
-        filterArray = array
+let checkboxClass = Array.from(document.querySelectorAll('.checkboxClass'))
+
+//console.log(checkboxClass);
+
+let searchId = document.getElementById('searchId')
+
+
+checkboxClass.forEach(checkbox => checkbox.addEventListener('click',filtrarCards))
+
+searchId.addEventListener('input', filtrarCards)
+
+function filtrarCards(){
+    let checkBoxFilitrados = checkboxFilters(pastEvents)
+    let searchFiltrados = searchFilters(checkBoxFilitrados, searchId.value)
+    if(searchFiltrados.length !== 0){
+        containerCards.innerHTML = ``
     }
-    
-    printEvents( filterArray,'container')
-    
-    
-
+    searchFiltrados.forEach(printEvents)
 }
-const inputSearch = document.getElementById( 'buscador' )
- 
-inputSearch.addEventListener('keyup', eventParameter =>{
-    let inputUser = eventParameter.target.value
-    let filter = fechas.filter(objectEvents => objectEvents.category.toLocaleLowerCase().includes(inputUser))
 
-    container.innerHTML = ""
-    printEvents( filter,'container')
-})
+
+
+function checkboxFilters(evento){
+    let checkboxFiltering = checkboxClass.filter(check => check.checked).map(check => check.value)
+    if(checkboxFiltering.length !== 0){
+        let checkboxFiltering2 = evento.filter(event => checkboxFiltering.includes(event.category))
+        return checkboxFiltering2
+    }
+    return evento
+}
+
+function searchFilters(array,text){
+    let searchFiltering = array.filter(evento=> evento.name.toLowerCase().includes(text.toLowerCase()))
+    if (searchFiltering.length === 0){
+        containerCards.innerHTML= 
+        `
+        <h1> No hay coincidencia </h1>
+        `
+        return []
+    }
+    return searchFiltering
+}

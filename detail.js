@@ -13,10 +13,11 @@ function printEvents(array,id) {
     array.forEach(event =>{
         document.querySelector(`#${id}`).innerHTML +=
             `
-            <figure class="detailimage">
+            
+         <figure class="detailimage">
             <img src="${event.image}" alt="comidas">
-            </figure>
-            <article> 
+        </figure>
+        <article> 
             <h3>${event.name}</h3>
         </article>
         <div>
