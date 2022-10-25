@@ -1,7 +1,55 @@
 //console.log(data)
 const containerCards = document.getElementById(`container`)
-const eventos = data.events
-//console.log(eventos)
+
+ async function getData(url){
+    let response = await fetch(url)
+    //console.log(response);
+    let data = await response.json()
+    console.log(data);
+    const eventos = data.events
+    
+    
+    //funcion printEvents
+    eventos.forEach(printEvents)
+
+    //const containerChecks = document.getElementById('checkBox-js')
+    
+    let categoriasCheckbox = new Set (eventos.map(evento => evento.category))
+    
+    categoriasCheckbox.forEach(createCheckBox)
+    
+    //funcion CreateCheckBox
+
+    let checkboxClass = Array.from(document.querySelectorAll('.checkboxClass'))
+
+    //let searchId = document.getElementById('searchId')
+    
+    checkboxClass.forEach(checkbox => checkbox.addEventListener('click',filtrarCards))
+
+    searchId.addEventListener('input', filtrarCards)
+
+    function filtrarCards(){
+        
+        let checkBoxFilitrados = checkboxFilters(eventos)
+        let searchFiltrados = searchFilters(checkBoxFilitrados, searchId.value)
+        if(searchFiltrados.length !== 0){
+            containerCards.innerHTML = ``
+        }
+        searchFiltrados.forEach(printEvents)
+    }
+    
+    function checkboxFilters(evento){
+        
+        let checkboxFiltering = checkboxClass.filter(check => check.checked).map(check => check.value)
+        if(checkboxFiltering.length !== 0){
+            let checkboxFiltering2 = evento.filter(event => checkboxFiltering.includes(event.category))
+            return checkboxFiltering2
+        }
+        return evento
+    }
+    //funcion searchFilters
+
+}
 
 function printEvents(event) {
     containerCards.innerHTML +=
@@ -12,20 +60,16 @@ function printEvents(event) {
     <p>${event.date}</p>
     <p>${event.category}</p>
     <div class="ancorbut">
-    <a href="./details.html?id=${event._id}">more info</a>
+    <a href="./details.html?id=${event.id}">more info</a>
     </div>
     </article>
     `
 }
 
-eventos.forEach(printEvents)
-
 
 const containerChecks = document.getElementById('checkBox-js')
 
-let categoriasCheckbox = new Set (eventos.map(evento => evento.category))
 
-categoriasCheckbox.forEach(createCheckBox)
 
 function createCheckBox(categoria){
     containerChecks.innerHTML +=  
@@ -37,36 +81,8 @@ function createCheckBox(categoria){
     `
 }
 
-let checkboxClass = Array.from(document.querySelectorAll('.checkboxClass'))
-
-//console.log(checkboxClass);
-
 let searchId = document.getElementById('searchId')
 
-
-checkboxClass.forEach(checkbox => checkbox.addEventListener('click',filtrarCards))
-
-searchId.addEventListener('input', filtrarCards)
-
-function filtrarCards(){
-    let checkBoxFilitrados = checkboxFilters(eventos)
-    let searchFiltrados = searchFilters(checkBoxFilitrados, searchId.value)
-    if(searchFiltrados.length !== 0){
-        containerCards.innerHTML = ``
-    }
-    searchFiltrados.forEach(printEvents)
-}
-
-
-
-function checkboxFilters(evento){
-    let checkboxFiltering = checkboxClass.filter(check => check.checked).map(check => check.value)
-    if(checkboxFiltering.length !== 0){
-        let checkboxFiltering2 = evento.filter(event => checkboxFiltering.includes(event.category))
-        return checkboxFiltering2
-    }
-    return evento
-}
 
 function searchFilters(array,text){
     let searchFiltering = array.filter(evento=> evento.name.toLowerCase().includes(text.toLowerCase()))
@@ -80,3 +96,4 @@ function searchFilters(array,text){
     return searchFiltering
 }
 
+getData("https://mh-amazing.herokuapp.com/amazing")

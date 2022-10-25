@@ -3,9 +3,14 @@ let id = location.search.slice(4);
 
 let detailCard = document.getElementById('detail-card');
 
-let idFiltrada = data.events.filter(data => data._id == id)
-//console.log(idFiltrada);
-idFiltrada.forEach(printEvents)
+async function getData(url){
+    let response = await fetch(url)
+    let data = await response.json()
+    printEvents(data.event)
+    console.log(data);
+}    
+getData(`https://mh-amazing.herokuapp.com/amazing/${id}`)
+
 
 function printEvents(event) {
     detailCard.innerHTML +=

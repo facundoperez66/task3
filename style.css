@@ -6,9 +6,9 @@
 .top{
  display: flex; 
  align-items: center;
- height: 7vh;
+ height: 9vh;
  justify-content: space-around;  
-
+background-color: rgb(255, 255, 255);
  width: 100%;
  
 }
@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     background-color:rgb(202, 31, 103);
-    color: aliceblue;
+    color: rgb(228, 228, 235);
     font-size: 1.5rem;
     flex-wrap: wrap;
     
@@ -54,6 +54,7 @@
     display: flex;
     border-style: none;
     margin-top: 10px;
+    height: 30px;
 }
 .check{
     display: flex;
@@ -81,7 +82,7 @@ main{
    gap: 1rem;
     min-height: 60vh;
     align-items: center; 
-    margin-top:1px;
+    margin-top:4px;
 }
 
     
@@ -91,20 +92,20 @@ main{
     flex-direction: column;
     justify-content: space-around;
     gap: .5rem;
-    width: 150px;
+    width: 270px;
     height: 250px;
     align-items: center;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgb(53, 51, 51);
     text-align: center;
-    background-color: rgb(83, 83, 228);
+    background-color: rgb(3, 3, 3);
     color: aliceblue;
     flex-wrap: wrap;
 }
 
 .card img{
-    width: 80%;
-    height: 80px;
+    width: 100%;
+    height: 120px;
     border-radius: 10px;
     
 }
@@ -113,7 +114,7 @@ main{
     display: flex;
     align-items: center;
     height: 14.5vh ;
-    background-color: beige;
+    background-color: rgb(241, 236, 236);
 
 }
 .logosredes{
@@ -164,6 +165,7 @@ table, th, td{
 }
 .details img{
     border-radius: 10px;
+    width: 300px;
 }
 
 .ancorbut{
@@ -172,6 +174,10 @@ table, th, td{
     color: black;
     border-radius: 5px;
     padding: 4px;
+}
+
+.ancorbut a{
+    text-decoration: none;
 }
 
 
@@ -184,7 +190,7 @@ table, th, td{
         margin-top: 10px;
     }
     .card{
-        width: 150px;
+        width: 270px;
         
     }
     .card img{
@@ -195,7 +201,7 @@ table, th, td{
     }
 }
 
-@media screen and (max-width: 517px){
+@media screen and (max-width:643px){
    .top{
     flex-direction: column;
     height: 20vh;
