@@ -9,6 +9,7 @@ const containerCards = document.getElementById(`container`)
 
 
 async function getData(url){
+   
     let response = await fetch(url)
     //console.log(response);
     let data = await response.json()

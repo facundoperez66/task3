@@ -3,7 +3,7 @@ const upcoming = document.getElementById('container-td2')
 const past = document.getElementById('container-td3')
 
 async function getData(){
-    
+    try{
     let responsepast = await fetch("https://mh-amazing.herokuapp.com/amazing?time=past")
     let datapast = await responsepast.json()
     
@@ -46,7 +46,10 @@ async function getData(){
     eventosFuturos.forEach(evento => {
         let ganancia = evento.estimate * evento.price
         let categoria = evento.category
-        let attendance = evento.estimate / evento.capacity * 100// declarar variables estimate y capacity y cuando
+       
+        let estimado = evento.estimate
+        let capacidad = evento.capacity 
+        let attendance = estimado / capacidad * 100                          // declarar variables estimate y capacity y cuando
         if (estadisticasFuturas[categoria]) {                   // este por imprimirlo hago la opreacion de imprimir y mmultiplicar
             estadisticasFuturas[categoria].ganancia += ganancia
         }else {
@@ -96,7 +99,7 @@ async function getData(){
     
 
 
-}
+}catch(error){console.log(error);}}
 
 getData()
 
